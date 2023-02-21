@@ -1,0 +1,62 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    // public static int subArrauSum(int[] arr, int n, int sum){
+    //     int currentSum = arr[0];
+    //     int start = 0;
+    //     int i;
+    //     for( i=1; i<=n; i++){
+    //         while(currentSum > sum && start < i-1){
+    //             currentSum = currentSum - arr[start];
+    //             start++;
+    //         }
+    //         if(currentSum == sum){
+    //             int p = i-1;
+    //             System.out.println((start+1) + " " + (p+1));
+    //             return 1;
+    //         }
+    //         if(i < n){
+    //             currentSum = currentSum + arr[i];
+    //         }
+
+    //     }
+    //     return -1;
+    // }
+    public static void main (String[] args) {
+        // Your code here
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        long k = scan.nextLong();
+        // int sum = scan.nextInt();
+        long[] arr = new long[n];
+        for(int i=0; i<n; i++){
+            arr[i] = scan.nextLong();
+        }
+        long sum = 0;
+        HashMap<Long, Integer> hm = new HashMap<>();
+        boolean flag = false;
+        for(int i=0; i<n; i++){
+            sum += arr[i];
+            if(sum == k){
+                System.out.println("1 " + (i+1));
+                flag = true;
+                break;
+            }
+            else if(hm.containsKey(sum-k)){
+                int start = hm.get(sum-k) + 1;
+                int end = i;
+                System.out.println((start + 1) + " " + (end+1));
+                flag = true;
+                break;
+            }
+            hm.put(sum,i);
+        }
+        if(!flag){
+            System.out.println(-1);
+        }
+
+    }
+}
