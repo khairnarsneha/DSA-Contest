@@ -1,0 +1,35 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args)throws Exception{
+
+    BufferedReader bu= new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb=new StringBuilder();
+    int n=Integer.parseInt(bu.readLine());
+    String s[]=bu.readLine().split(" ");
+    Set<String>set=new HashSet(Arrays.asList(s));
+    ArrayList<String>ans=new ArrayList<>();
+    for(String x:s){
+        set.remove(x);
+        if(dfs(x, set, "")) ans.add(x);
+        set.add(x);
+    }
+    if(ans.size()==0) sb.append("-1");
+    else for(String x:ans) sb.append(x+" ");
+    System.out.println(sb);
+        // Your code here
+
+    }
+    static boolean dfs(String w, Set<String> set, String p){
+        if(!p.equals(""))set.add(p);
+        if(set.contains(w))return true;
+        for(int i=1; i<w.length();i++){
+            String pre=w.substring(0, i);
+            if(set.contains(pre) && dfs(w.substring(i, w.length()), set, p+pre)) return true;
+        }
+        return false;
+    }
+}
