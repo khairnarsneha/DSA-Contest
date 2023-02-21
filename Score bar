@@ -1,0 +1,32 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) {
+        // Your code here
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<arr.length;i++){
+            arr[i]=sc.nextInt();
+        }
+        int curr=arr[0];
+        int count=arr[0];
+        int max=Integer.MIN_VALUE;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]>curr){
+                int diff=arr[i]-curr;
+                max=Math.max(max,diff);
+                curr=arr[i];
+
+            }else{
+                curr=arr[i];
+
+            }
+        }
+
+        System.out.print(max);
+    }
+}
